@@ -7,4 +7,3 @@ numofguest = int(input())
 if numofguest:
     print('Be sure to have enough room for all your guests. ')
 print('Done. ')
-            
