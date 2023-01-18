@@ -13,22 +13,23 @@ async def main():
     msg = await socket.recv()
     print(msg) 
 
-#while True:
-    #async def main():
+engine = sqlalchemy.create_engine('sqlite:///BTCBUSDstream.db')
+
+while True:
+    async def main():
         
-        #await socket.__aenter__()
-        #msg = await socket.recv()
-        #frame = createframe(msg)
-        #frame.to_sql('BTCBUSD', engine, if_exists='append', index=False)
-        #print(frame)
+        await socket.__aenter__()
+        msg = await socket.recv()
+        frame = createframe(msg)
+        frame.to_sql('BTCBUSD', engine, if_exists='append', index=False)
+        print(frame)
 
-    #def createframe(msg):
-       # df = pd.DataFrame([msg])
-       # df = df.loc[:,['s','E','p']]
-      #  df.columns = ['symbol','Time','Price']
-      #  df.Price = df.Price.astype(float)
-      #  df.Time = pd.to_datetime(df.time, unit = 'ms')
-       # return df
-       # createframe(msg)    
-
-  #  engine = sqlalchemy.create_engine('sqlite:///BTCBUSDstream.db')
+    def createframe(msg):
+        df = pd.DataFrame([msg])
+        df = df.loc[:,['s','E','p']]
+        df.columns = ['symbol','Time','Price']
+        df.Price = df.Price.astype(float)
+        df.Time = pd.to_datetime(df.time, unit = 'ms')
+        return df
+        createframe(msg)   
+ 
