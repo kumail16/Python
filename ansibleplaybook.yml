@@ -1,0 +1,23 @@
+---
+- name: Create loopback interface
+  hosts: ['CoreSw','Gateway','ISP']
+  gather_facts: false
+  connection: network_cli
+  vars:
+    cli:
+      host: "{{ inventory_hostname }}"
+      username: ansible
+      password: cisco
+      transport: cli
+  tasks:
+  - name: create loopback interface
+    ios_config:
+      provider: "{{ cli }}"
+      lines:
+        - interface loopback 10
+        - ip address 10.10.10.10 255.255.255.0
+      parents: interface loopback 10
+  - name: save config
+    ios_config:
+      provider: "{{ cli }}"
+      save_when: always
