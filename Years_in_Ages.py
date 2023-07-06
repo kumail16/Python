@@ -1,7 +1,7 @@
-years_of_birth = []
+your_year_birth = []
 add_year = input('Enter your year of birth: ')
-years_of_birth.append(add_year)
+your_year_birth.append(add_year)
 ages = []
-for year in years_of_birth:
+for year in your_year_birth:
     ages.append(2023 - int(year))
     print(f'you are {ages} year/s old')
